@@ -1,23 +1,24 @@
 <?php
 
-namespace App\Model\admin;
+namespace App\Model\Admin;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class admin extends Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
 
     public function roles()
     {
-        return $this->belongsToMany('App\Model\admin\role');
+        return $this->belongsToMany(Role::class);
     }
 
     public function getNameAttribute($value)
-        {
-            return ucfirst($value);
-        }
+    {
+        return ucfirst($value);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\admin\admin;
-use App\Model\admin\role;
+use App\Model\Admin\Admin;
+use App\Model\Admin\Role;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = admin::all();
+        $users = Admin::all();
         return view('admin.user.show',compact('users'));
     }
 
@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = role::all();
+        $roles = Role::all();
         return view('admin.user.create',compact('roles'));
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
         $request['password'] = bcrypt($request->password);
-        $user = admin::create($request->all());
+        $user = Admin::create($request->all());
         $user->roles()->sync($request->role);
         return redirect(route('user.index'));
     }
@@ -79,8 +79,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = admin::find($id);
-        $roles = role::all();
+        $user = Admin::find($id);
+        $roles = Role::all();
         return view('admin.user.edit',compact('user','roles'));
     }
 
@@ -99,8 +99,8 @@ class UserController extends Controller
             'phone' => 'required|numeric',
         ]);
         $request->status? : $request['status']=0;
-        $user = admin::where('id',$id)->update($request->except('_token','_method','role'));
-        admin::find($id)->roles()->sync($request->role);
+        $user = Admin::where('id',$id)->update($request->except('_token','_method','role'));
+        Admin::find($id)->roles()->sync($request->role);
         return redirect(route('user.index'))->with('message','User updated successfully');
     }
 
@@ -112,7 +112,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        admin::where('id',$id)->delete();
+        Admin::where('id',$id)->delete();
         return redirect()->back()->with('message','User is deleted successfully');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\user\category;
+use App\Model\User\category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

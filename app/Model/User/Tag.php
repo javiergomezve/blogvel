@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Model\user;
+namespace App\Model\User;
 
 use Illuminate\Database\Eloquent\Model;
 
-class tag extends Model
+class Tag extends Model
 {
     public function posts()
     {
-    	return $this->belongsToMany('App\Model\user\post','post_tags')->orderBy('created_at','DESC')->paginate(5);
+    	return $this->belongsToMany(Post::class,'post_tags')->orderBy('created_at', 'DESC')->paginate(5);
     }
 
     public function getRouteKeyName()

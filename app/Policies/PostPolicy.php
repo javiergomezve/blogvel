@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Model\admin\admin;
+use App\Model\Admin\Admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostPolicy
@@ -16,7 +16,7 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function view(admin $user)
+    public function view(Admin $user)
     {
         //
     }
@@ -27,7 +27,7 @@ class PostPolicy
      * @param  \App\admin  $user
      * @return mixed
      */
-    public function create(admin $user)
+    public function create(Admin $user)
     {
         return $this->getPermission($user,4);
     }
@@ -39,7 +39,7 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function update(admin $user)
+    public function update(Admin $user)
     {
         return $this->getPermission($user,5);
     }
@@ -51,17 +51,17 @@ class PostPolicy
      * @param  \App\Post  $post
      * @return mixed
      */
-    public function delete(admin $user)
+    public function delete(Admin $user)
     {
         return $this->getPermission($user,6);
     }
 
-    public function tag(admin $user)
+    public function tag(Admin $user)
     {
         return $this->getPermission($user,11);
     }
 
-    public function category(admin $user)
+    public function category(Admin $user)
     {
         return $this->getPermission($user,12);
     }

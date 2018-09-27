@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Model\user;
+namespace App\Model\User;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class post extends Model
+class Post extends Model
 {
     public function tags()
     {
-    	return $this->belongsToMany('App\Model\user\tag','post_tags')->withTimestamps();
+    	return $this->belongsToMany(Tag::class,'post_tags')->withTimestamps();
     }
 
     public function categories()
     {
-    	return $this->belongsToMany('App\Model\user\category','category_posts')->withTimestamps();;
+    	return $this->belongsToMany(Category::class,'category_posts')->withTimestamps();
     }
 
     public function getRouteKeyName()
@@ -29,11 +29,11 @@ class post extends Model
 
     public function likes()
     {
-        return $this->hasMany('App\Model\user\like');
+        return $this->hasMany(Like::class);
     }
 
     public function getSlugAttribute($value)
     {
-        return route('post',$value);
+        return route('post', $value);
     }
 }

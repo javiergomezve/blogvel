@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\user\category;
-use App\Model\user\post;
-use App\Model\user\tag;
+use App\Model\User\category;
+use App\Model\User\Post;
+use App\Model\User\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = post::all();
+        $posts = Post::all();
         return view('admin.post.show',compact('posts'));   
     }
 
@@ -40,7 +40,7 @@ class PostController extends Controller
     public function create()
     {
         if (Auth::user()->can('posts.create')) {
-           $tags =tag::all();
+           $tags =Tag::all();
             $categories =category::all();
             return view('admin.post.post',compact('tags','categories'));
         }
@@ -68,7 +68,7 @@ class PostController extends Controller
         }else{
             return 'No';
         }
-        $post = new post;
+        $post = new Post;
         $post->image = $imageName;
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
@@ -102,8 +102,8 @@ class PostController extends Controller
     public function edit($id)
     {
         if (Auth::user()->can('posts.update')) {
-            $post = post::with('tags','categories')->where('id',$id)->first();
-            $tags =tag::all();
+            $post = Post::with('tags','categories')->where('id',$id)->first();
+            $tags =Tag::all();
             $categories =category::all();
             return view('admin.post.edit',compact('tags','categories','post'));
         }
@@ -129,7 +129,7 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
             $imageName = $request->image->store('public');
         }
-        $post = post::find($id);
+        $post = Post::find($id);
         $post->image = $imageName;
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
@@ -151,7 +151,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        post::where('id',$id)->delete();
+        Post::where('id',$id)->delete();
         return redirect()->back();
     }
 }

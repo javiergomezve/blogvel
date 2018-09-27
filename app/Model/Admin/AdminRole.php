@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Model\user;
+namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class post_tag extends Model
+class AdminRole extends Model
 {
     //
 }
