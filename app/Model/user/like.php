@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Model\user;
+namespace App\Model\User;
 
 use Illuminate\Database\Eloquent\Model;
 
-class like extends Model
+class Like extends Model
 {
     public function post()
     {
-    	return $this->belongsTo('App\Model\user\post','like'); 
+    	return $this->belongsTo(Post::class,'like');
     }
 }

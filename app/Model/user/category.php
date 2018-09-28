@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Model\user;
+namespace App\Model\User;
 
 use Illuminate\Database\Eloquent\Model;
 
-class category extends Model
+class Category extends Model
 {
     public function posts()
     {
-    	return $this->belongsToMany('App\Model\user\post','category_posts')->orderBy('created_at','DESC')->paginate(5);
+    	return $this->belongsToMany(Post::class,'category_posts')
+            ->orderBy('created_at', 'DESC')->paginate(5);
     }
 
     public function getRouteKeyName()
